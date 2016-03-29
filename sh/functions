@@ -1,3 +1,18 @@
 # Bash
 # Commonly used functions
 
+# Generate random 32-character alphanumeric string
+generate_uuid() {
+    echo `date +%s | sha256sum | base64 | head -c 32`
+    return 0
+}
+
+# Find all broken links in given directory and subdirs
+# usage: broken_links <directory>
+broken_links() {
+    find $1 -type l -! -exec test -e {} \; -print
+    return 0
+}
+
+# vim: tabstop=4 shiftwidth=4 expandtab smartindent
+
