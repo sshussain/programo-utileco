@@ -1,4 +1,7 @@
-import os, sys
+from __future__ import print_function
+import os
+import sys
+import re
 import string
 
 def is_blank(s):
@@ -9,14 +12,26 @@ def is_blank(s):
         return True
     return False
 
+
 def is_alpha_numeric(s):
     """
     Return True if string contains only alphabets and numbers
     """
     if is_blank(s) == True:
         return False
-    # TODO use regex to check string
     return s.isalnum()
+
+
+def squeeze_ws(s):
+    """
+    Strip whitespaces at start and end of string. Replace multiple whitespaces with single SPACE
+    """
+    origstr = s
+    chgstr = re.sub('^\s+', '', origstr)
+    chgstr = re.sub('\s+', ' ', chgstr)
+    chgstr = re.sub('\s+$', '', chgstr)
+    return chgstr
+
 
 if __name__ == "__main__":
     print is_alpha_numeric("123")
