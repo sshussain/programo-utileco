@@ -1,9 +1,12 @@
 from __future__ import print_function
-import os
-import sys
+import os, sys
 import string
+import tempfile
+from shutil import copy2, copytree, ignore_patterns, move
 
-__all__ = ['get_basename', 'get_extension', 'directory_contains']
+
+__all__ = ['get_basename', 'get_extension', 'directory_contains', 'copy_file', 'move', 'create_tempfile', 'create_tempdir']
+
 
 def get_basename(fname):
     """
@@ -22,11 +25,19 @@ def get_basename(fname):
 def get_extension(fname):
     """
     Get extension of file.
-    c.txt => txt
-    /opt/c.txt => txt
-    ~/myname/foo.bar.x => bar.x
+    foo =>
+    include.c => c
+    /opt/foo.txt => txt
+    foo.bar.h => bar
+    /opt//tomcat/webapps/junk.war => war
+    .jar => jar
     """
-    return None
+    h,t = os.path.split(fname)
+    x = string.split(t, '.')
+
+    if len(x) == 1:
+        return ''
+    return x[1]
 
 
 def directory_contains(dirname, fname):
@@ -48,20 +59,64 @@ def directory_contains(dirname, fname):
     return False
 
 
+def copy_file(src, dst):
+    """
+    Wrapper for shutil copy methods
+    src - file to be copied
+    dst - destination file name or directory
+    """
+    copy2(src, dst)
+
+
+def copy_tree(src, dst, symlinks=False, ignore=None):
+    """
+    Wrapper for shutil copytree method
+    src - source tree
+    dst - destination directory
+    symlinks - copy symbolic links
+    ignore - do not copy files/directory that matches pattern
+    """
+    copytree(src, dst, symlinks, ignore)
+
+
+def move(src, dst):
+    shutil.move(src, dst)
+
+
+def create_tempfile():
+    return tempfile.mkstemp()
+
+
+def create_tempdir():
+    return tempfile.mkdtemp()
+
+
 def test_get_basename(fname):
     print("test_get_basename:", " path:", fname)
     print("result: ", get_basename(fname))
+
+
+def test_get_extension(fname):
+    print("test_get_extension:", " path:", fname)
+    print(get_extension(fname))
 
 
 def test_dir_contains(d, f):
     print("test_dir_contains:", " dir:", d, " file: ", f)
     print("result:", directory_contains(d, f))
 
+
 if __name__ == "__main__":
-    test_get_basename("foo")
-    test_get_basename("include.c")
-    test_get_basename("/opt/foo.txt")
-    test_get_basename("foo.bar.h")
-    test_get_basename("/opt//tomcat/webapps/junk.war")
+    # test_get_basename("foo")
+    #test_get_basename("include.c")
+    #test_get_basename("/opt/foo.txt")
+    #test_get_basename("foo.bar.h")
+    #test_get_basename("/opt//tomcat/webapps/junk.war")
+    test_get_extension("foo")
+    test_get_extension("include.c")
+    test_get_extension("/opt/foo.txt")
+    test_get_extension("foo.bar.h")
+    test_get_extension("/opt//tomcat/webapps/junk.war")
+    test_get_extension(".jar")
     test_dir_contains(".", "curl_no_proxy.py")
     test_dir_contains(".", "_proxy.py")
