@@ -91,6 +91,12 @@ def create_tempdir():
     return tempfile.mkdtemp()
 
 
+def tar(base_name, root_dir, base_dir):
+    pass
+
+def untar(tar_file, extract_dir):
+    pass
+
 def test_get_basename(fname):
     print("test_get_basename:", " path:", fname)
     print("result: ", get_basename(fname))

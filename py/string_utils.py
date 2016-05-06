@@ -1,9 +1,9 @@
-from __future__ import print_function
 import os
 import sys
 import re
 import string
 
+__all__ = ['is_blank', 'is_alpha_numeric', 'squeeze_ws']
 def is_blank(s):
     """
     Return True if string is null or is empty (no characters)
@@ -26,18 +26,12 @@ def squeeze_ws(s):
     """
     Strip whitespaces at start and end of string. Replace multiple whitespaces with single SPACE
     """
+    if is_blank(s):
+        return s
     origstr = s
     chgstr = re.sub('^\s+', '', origstr)
     chgstr = re.sub('\s+', ' ', chgstr)
     chgstr = re.sub('\s+$', '', chgstr)
     return chgstr
-
-
-if __name__ == "__main__":
-    print is_alpha_numeric("123")
-    print is_alpha_numeric("junk")
-    print is_alpha_numeric("junk12")
-    print is_alpha_numeric("$$junk12")
-    print is_alpha_numeric("$$junk12%% ^^")
 
 # vim: tabstop=4 shiftwidth=4 expandtab smartindent
