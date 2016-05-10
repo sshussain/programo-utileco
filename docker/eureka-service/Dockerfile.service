@@ -1,0 +1,4 @@
+FROM java:8
+EXPOSE 8001
+COPY eureka-examples-bin /eureka-examples-bin
+ENTRYPOINT ./eureka-examples-bin/bin/ExampleEurekaService

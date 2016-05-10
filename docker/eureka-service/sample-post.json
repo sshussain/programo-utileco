@@ -1,0 +1,35 @@
+{
+    "instance": {
+        "hostName": "str1234",
+        "app": "str1234",
+        "ipAddr": "str1234",
+        "vipAddress": "str1234",
+        "secureVipAddress": "str1234",
+        "status": "UP",
+        "port": "745",
+        "securePort": "745",
+        "homePageUrl": "str1234",
+        "statusPageUrl": "str1234",
+        "healthCheckUrl": "str1234",
+        "dataCenterInfo": {
+            "name": "MyOwn",
+            "metadata": {
+                "ami-launch-index": "str1234",
+                "local-hostname": "str1234",
+                "availability-zone": "str1234",
+                "instance-id": "str1234",
+                "public-ipv4": "str1234",
+                "public-hostname": "str1234",
+                "ami-manifest-path": "str1234",
+                "local-ipv4": "str1234",
+                "hostname": "str1234",
+                "ami-id": "str1234",
+                "instance-type": "str1234"
+            }
+        },
+        "leaseInfo": {
+            "evictionDurationInSecs": "745"
+        },
+        "metadata": ""
+    }
+}
