@@ -3,7 +3,7 @@ import sys
 import re
 import string
 
-__all__ = ['is_blank', 'is_alpha_numeric', 'squeeze_ws']
+__all__ = ['is_blank', 'squeeze_ws']
 def is_blank(s):
     """
     Return True if string is null or is empty (no characters)
@@ -11,15 +11,6 @@ def is_blank(s):
     if s is None or len(s) == 0:
         return True
     return False
-
-
-def is_alpha_numeric(s):
-    """
-    Return True if string contains only alphabets and numbers
-    """
-    if is_blank(s) == True:
-        return False
-    return s.isalnum()
 
 
 def squeeze_ws(s):
