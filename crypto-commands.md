@@ -19,6 +19,18 @@ openssl pkcs12 -nocerts -out private_key.p12 -in private_key.pem
 openssl x509 -outform der -in ca.pem -out ca.crt
 ```
 
+### Decode PEM formatted certificate
+
+```shell
+openssl x509 -in my-cert.crt -text -noout
+```
+
+### Decode DER formatted certificate
+
+```shell
+openssl x509 -in my-cert.der -inform der -text -noout
+```
+
 ## ssh-keygen
 
 ### Create private-public key pair for SSH
